@@ -7,12 +7,14 @@ Para poder demostar y aprender la creación y consumo de Interfaces de Programac
 
 ## Historial de Practicas
 |No.|Fecha|Descripción|Potenciadores|Estatus|
-|--|--|--|--|
+|--|--|--|--|--|
 |8.|17/10/2024|Nuevo Repositorio Del Proyecto implementado .gitignore|1|Finalizada|
 
 ### Autor
 Carlos Daniel Garcia Pluma 
+
 [@DanielGarciaPluma](https://github.com/DanielGarciaPluma)
+</br>
 Unidad 2
 Aplicaiones Web Orientado a Servicios
 Octubre 2024
