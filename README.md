@@ -12,8 +12,7 @@ Para poder demostar y aprender la creación y consumo de Interfaces de Programac
 |9.-|22/10/2024|Creacion de la aplicacion web usando Express|12|Activa⭐|
 
 ### Tech Stack
-[Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
-[Express](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)
+![NodeJS](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)![Express](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)
 ### Autor
 Carlos Daniel Garcia Pluma [@DanielGarciaPluma](https://github.com/DanielGarciaPluma)
 </br>
