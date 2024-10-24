@@ -11,6 +11,7 @@ Para poder demostar y aprender la creación y consumo de Interfaces de Programac
 |8.|17/10/2024|Nuevo Repositorio Del Proyecto implementado .gitignore|1|Finalizada|
 |9.-|22/10/2024|Creacion de la aplicacion web usando Express|12|Finalizada|
 |10.-|23/10/2024|Operaciones basicas de un API a travez de los verbos HTTP|pendiente|Activa|
+||||||
 
 ### Tech Stack
 ![NodeJS](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)![Express](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)
