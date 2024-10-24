@@ -1,4 +1,5 @@
-import express from "express";
+import express, { Router } from "express";
+import { formularioLogin, formularioRegister,formularioPasswordRecovery } from "../controllers/userController.js";
 const router = express.Router();
 
 //GET
@@ -38,15 +39,8 @@ router.delete("/deleteUser/:email", function(request, response){
     response.send(`Se ha soliciatdo la eliminacion del usuario asociado al correo ${request.params.email}`)
 })
 
-
-
-
-
-
-
-
-
-
-
+router.get('/login',formularioLogin/*middleware*/)
+router.get('/createAccount', formularioRegister)
+router.get('/passwordRecovery',formularioPasswordRecovery)
 
 export default router;

@@ -12,6 +12,11 @@ import userRoutes from "./routes/userRoutes.js"
 
 const app = express()
 
+//Configurar Templeate Engine - PUG
+app.set('view engine', 'pug')
+app.set('views', './views')
+
+//Configuramos nuetsro servidor web
 const port = 3000
 app.listen(port,()=>{
     console.log(`La aplicacion se ha iniciado en el puerto ${port}`)
