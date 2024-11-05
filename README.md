@@ -10,7 +10,8 @@ Para poder demostar y aprender la creación y consumo de Interfaces de Programac
 |--|--|--|--|--|
 |8.|17/10/2024|Nuevo Repositorio Del Proyecto implementado .gitignore|1|Finalizada|
 |9.-|22/10/2024|Creacion de la aplicacion web usando Express|12|Finalizada|
-|10.-|23/10/2024|Operaciones basicas de un API a travez de los verbos HTTP|pendiente|Activa|
+|10.-|23/10/2024|Operaciones basicas de un API a travez de los verbos HTTP|13|Finalizada|
+|11.-|05/11/2024|Implementacion de las pantallas de registro, logeo y recuperacion de la contraseña|13|Activa|
 ||||||
 
 ### Tech Stack

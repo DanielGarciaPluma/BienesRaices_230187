@@ -16,6 +16,9 @@ const app = express()
 app.set('view engine', 'pug')
 app.set('views', './views')
 
+//Definir la carpeta publica de recursos estaticos (assets)
+app.use(express.static('./public'));
+
 //Configuramos nuetsro servidor web
 const port = 3000
 app.listen(port,()=>{

@@ -5,6 +5,7 @@ const formularioLogin = (request, response) => {
 
 const formularioRegister = (request, response) => {
     response.render('auth/register')
+        page : "crea una nueva cuenta";
 }
 
 const formularioPasswordRecovery = (request, response) => {

@@ -1,2 +1,34 @@
-div 
-    h2.text-center Crea tu cuenta de usuario
+extends ../layout/index
+
+block contenido
+    div.py-10
+        h2.text-center.font-extrabold.my-10.font-4xl.text-purple-600 Bienes
+            span.font-normal.text-black Raices
+
+                h2.text-center.font-extrabold.font-2xl Crea tu cuenta
+        
+        .mt-8.mx-auto.max-w-md
+            .bg-white.py-8.px-4.shadow
+                form.space-y-5
+                    div
+                        label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="nombre") Tu Nombre
+                        input#nombre.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Tu nombre con apellidos" type="text" name="nombre")
+
+                    div
+                        label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="email") Email de Registro
+                        input#email.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Tu Email" type="email" name="email")
+                    
+                    div
+                        label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="password") Password
+                        input#password.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Minimo de 8 caracteres" type="password" name="password")
+
+                    
+                    div
+                        label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="repetir_password") Repetir Password
+                        input#repetir_password.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Mínimo de 8 caracteres, igual que el anterior" type="password" name="repite_password")
+
+                    div.flex.items-center.justify-between
+                        a.text-gray-500.text-xs(href="/usuario/login" class="hover:underline hover:decoration-2 hover:decoration-indigo-600") ¿Ya tienes una cuenta? Inicia Sesión 
+                        a.text-gray-500.text-xs(href='/usuario/passwordRecovery' class="hover:underline hover:decoration-2 hover:decoration-indigo-600") Olvide mi contraseña
+
+                    input(class="w-full bg-purple-600 hover:bg-indigo-700 text-white font- py-3 cursor-pointer" type="submit" value="Crear Cuenta")
