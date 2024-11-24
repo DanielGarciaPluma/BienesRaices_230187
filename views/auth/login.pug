@@ -2,24 +2,41 @@ extends ../layout/index
 
 block contenido
     div.py-10
-        h2.text-center.font-extrabold.my-10.font-4xl.text-purple-600 Bienes
-            span.font-normal.text-black Raices
+        h1.text-4xl.my-10.font-extrabold.text-center.text-action Bienes 
+            span.font-normal.text-primaryText Raices
+        h2.text-center.text-2xl.font-extrabold= page
 
-                h2.text-center.font-extrabold.font-2xl Inicia Sesion 
-        
-        .mt-8.mx-auto.max-w-md
-            .bg-white.py-8.px-4.shadow
-                form.space-y-5
-                    div
-                         label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="email") Email de Registro
-                            input#email.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Tu Email" type="email" name="email")
+        .mt-8.mx-auto.max-w-lg
+            .bg-formBackground.py-8.px-6.rounded-md.shadow-md
+                form(action="/login" method="post").space-y-5
+                    input(type="hidden" name="_csrf" value= csrfToken)
+                    div.mb-5
+                        label.block.text-sm.uppercase.text-secondaryText.mb-2.font-bold Ingresa tu email:
+                        input#email.w-full.px-4.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Ingresa tu email" type="email" name="email" required)
+                    div.mb-5
+                        label.block.text-sm.uppercase.text-secondaryText.mb-2.font-bold Ingresa tu contraseña:
+                        input#password.w-full.px-4.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Ingresa tu contraseña" type="password" name="password" required)
 
-                    div.mb-4
-                        label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="password") Password
-                            input#password.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Tu Password" type="password" name="password")
+                    input(class="w-full bg-action text-white hover:bg-hoverAction font-bold py-3 cursor-pointer transform transition-all duration-300 hover:scale-105" type="submit" value="Iniciar sesión")
 
-                    div.flex.items-center.justify-between.mb-4
-                            a.text-gray-500.text-xs(href="/usuario/createAccount" class="hover:underline hover:decoration-2 hover:decoration-indigo-600") ¿No tienes una cuenta? Crea una
-                            a.text-gray-500.text-xs(href='/usuario/passwordRecovery' class="hover:underline hover:decoration-2 hover:decoration-indigo-600") Olvide mi contraseña
+                    .flex.items-center.justify-between
+                        a.text-sm.text-secondaryText(href="/auth/register" class="hover:text-action hover:underline hover:underline-offset-4 transition-all duration-300 ease-in-out") ¿No tienes una cuenta? Crea una
+                        a.text-sm.text-secondaryText(href="/auth/passwordRecovery" class="hover:text-action hover:underline hover:underline-offset-4 transition-all duration-300 ease-in-out") ¿Olvidaste tu contraseña? Recupérala
 
-                    input(class="w-full bg-purple-600 hover:bg-indigo-700 text-white font- py-3 cursor-pointer" type="submit" value="Iniciar Sesion")
+    if errores
+        style.
+            .fade-error {
+                transition: opacity 1s ease-in-out;
+            }
+        script.
+            setTimeout(function() {
+                const errorMessages = document.querySelectorAll('.fade-error');
+                errorMessages.forEach((message, index) => {
+                    setTimeout(() => {
+                        message.style.opacity = '0'; 
+                        setTimeout(() => {
+                            message.style.display = 'none'; 
+                        }, 1000); 
+                    }, index * 2000); 
+                });
+            }, 1500); 
