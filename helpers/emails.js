@@ -24,72 +24,67 @@ const registerEmail = async (datos) => {
         subject: 'Confirma tu Cuenta en Bienes Raices',
         text: 'Confirma tu Cuenta en Bienes Raices',
         html: `
-            <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirma tu Cuenta en Bienes Raíces</title>
-</head>
-<body style="background-color: #ffffff; color: #000000; font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 20px; position: relative;">
-    <div style="max-width: 600px; margin: 0 auto; background-color: #faf5f0; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); position: relative;">
+                    <!DOCTYPE html>
+        <html lang="es">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Confirma tu Cuenta en Bienes Raíces</title>
+        </head>
+        <body style="background-color: #8D91C7; color: #000000; font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 20px; position: relative;">
+            <div style="max-width: 600px; margin: 0 auto; background-color: #FFFFFF; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); position: relative;">
 
-        <div style="position: absolute; top: 10px; right: 10px;">
-            <img src="cid:logoBR" alt="Logo Bienes Raíces" style="width: 50px; height: auto; border-radius: 5px;">
-        </div>
+                <h1 style="color: #ee7956; text-align: center; font-size: 24px; font-weight: bold; margin: 0 0 20px;">
+                    ¡Nos alegra tenerte con nosotros!
+                </h1>
 
-        <h1 style="color: #ee7956; text-align: center; font-size: 24px; font-weight: bold; margin: 0 0 20px;">
-            ¡Bienvenido a Bienes Raíces!
-        </h1>
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <img src="cid:casa" alt="Bienvenido" style="max-width: 100px; height: auto;">
+                </div>
 
-        <div style="text-align: center; margin-bottom: 20px;">
-            <img src="cid:casa" alt="Bienvenido" style="max-width: 100px; height: auto;">
-        </div>
+                <p style="color: #636363; margin: 10px 0;">
+                    ¡Hola, <strong>${nombre}</strong>! Nos complace que hayas decidido formar parte de nuestra comunidad.
+                </p>
 
-        <p style="color: #636363; margin: 10px 0;">
-            ¡Hola, <strong>${nombre}</strong>! Qué gusto verte por aquí.
-        </p>
+                <p style="color: #636363; margin: 10px 0;">
+                    Tu cuenta está casi lista. Solo falta que la confirmes haciendo clic en el siguiente enlace:
+                </p>
 
-        <p style="color: #636363; margin: 10px 0;">
-            Tu cuenta ya está casi lista. Solo debes confirmarla haciendo clic en el siguiente enlace:
-        </p>
+                <div style="text-align: center; margin: 20px 0;">
+                    <a href="${process.env.BACKEND_URL}:${process.env.PORT ?? 3000}/auth/confirmAccount/${token}" 
+                        style="background-color: #054A91; color: #ffffff; text-decoration: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; display: inline-block;">
+                        Confirmar Cuenta
+                    </a>
+                </div>
 
-        <div style="text-align: center; margin: 20px 0;">
-            <a href="${process.env.BACKEND_URL}:${process.env.PORT ?? 3000}/auth/confirmAccount/${token}" 
-                style="background-color: #ee7956; color: #ffffff; text-decoration: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; display: inline-block;">
-                Confirmar Cuenta
-            </a>
-        </div>
+                <p style="color: #636363; margin: 10px 0;">
+                    Una vez confirmes tu cuenta, podrás acceder a todos nuestros servicios y explorar las mejores opciones de bienes raíces. ¡Estamos emocionados de tenerte con nosotros!
+                </p>
 
-        <p style="color: #636363; margin: 10px 0;">
-            Una vez confirmes tu cuenta, podrás acceder a todos nuestros servicios y explorar las mejores opciones de bienes raíces. ¡Estamos emocionados de tenerte con nosotros!
-        </p>
+                <p style="color: #636363; margin: 10px 0;">
+                    Si no creaste esta cuenta, puedes ignorar este mensaje. ¡No te preocupes, nada sucederá!
+                </p>
 
-        <p style="color: #636363; margin: 10px 0;">
-            Si no creaste esta cuenta, puedes ignorar este mensaje. ¡No te preocupes, nada sucederá!
-        </p>
+                <div style="margin-top: 20px; text-align: center; font-size: 14px; font-style: italic; color: #636363;">
+                    <p>Atentamente,</p>
+                    <img src="cid:firma" alt="Firma del equipo de Bienes Raíces" style="width: 150px; height: auto; margin-top: 10px;">
+                    <p><strong>El equipo de Bienes Raíces</strong></p>
+                </div>
 
-        <div style="margin-top: 20px; text-align: right; font-size: 14px; font-style: italic; color: #636363;">
-            <p>Atentamente,</p>
-            <img src="cid:firma" alt="Firma del equipo de Bienes Raíces" style="width: 150px; height: auto; margin-top: 10px;">
-            <p><strong>El equipo de Bienes Raíces</strong></p>
-        </div>
+                <footer style="text-align: center; margin-top: 20px; font-size: 12px; color: #636363;">
+                    &copy; 2024 BienesRaices.com - Todos los derechos reservados. 
+                    <br>
+                    <a href="#politicas" style="color: #636363;">Políticas de Privacidad</a> | <a href="#terminos" style="color: #636363;">Términos de Servicio</a>
+                </footer>
 
-        <footer style="text-align: center; margin-top: 20px; font-size: 12px; color: #636363;">
-            &copy; 2024 BienesRaices.com - Todos los derechos reservados. 
-            <br>
-            <a href="#politicas" style="color: #636363;">Políticas de Privacidad</a> | <a href="#terminos" style="color: #636363;">Términos de Servicio</a>
-        </footer>
-
-    </div>
-</body>
-</html>
-
+            </div>
+        </body>
+        </html>
     `,
     attachments: [
         {
             filename: 'logo_BR.png', 
-            path: './public/assets/logo_BR.png', 
+            path: './public/assets/logo.png', 
             cid: 'logoBR' 
         },
         {
