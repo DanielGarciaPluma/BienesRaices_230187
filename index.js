@@ -1,30 +1,41 @@
-//Ejemplo de activacion de HOT RELOAD
-//console.log("Hola desde NodeJS esto esta en hot reload")
+import express from 'express'
+import csurf from 'csurf'
+import cookieParser from 'cookie-parser'
 
-//const express = require('express');
+import generalRoutes from './routes/generalRoutes.js'
+import userRoutes from './routes/userRoutes.js'
+import db from './db/config.js'
 
-//Importar la libreria para crear un servidor web
-//Instanciar nuestra aplicacion web
-import express from "express";
-
-import generalRoutes from "./routes/generalRoutes.js"
-import userRoutes from "./routes/userRoutes.js"
-
+// ? Crear la app
 const app = express()
 
-//Configurar Templeate Engine - PUG
 app.set('view engine', 'pug')
-app.set('views', './views')
+app.set('views', './Views')
 
-//Definir la carpeta publica de recursos estaticos (assets)
-app.use(express.static('./public'));
 
-//Configuramos nuetsro servidor web
-const port = 3000
-app.listen(port,()=>{
-    console.log(`La aplicacion se ha iniciado en el puerto ${port}`)
-})
+// ? Habilitar la lectura de los datos de un formulario
+app.use(express.urlencoded({ extended: true }))
 
-//Routing - Enroutamiento para peticiones
-app.use('/', generalRoutes);
-app.use('/usuario/', userRoutes);
+// ? Habilitar cookie Parser
+app.use(cookieParser())
+
+// ? Habilitar CSRF
+app.use(csurf({ cookie: true }))
+
+app.use(express.static('./public'))
+
+try {
+    await db.authenticate()
+    db.sync()
+    console.log('Conexión correcta a la base de datos')
+} catch (error) {
+    console.error('Error en la conexión a la base de datos:', error)
+}
+
+app.use('/', generalRoutes)
+app.use('/auth', userRoutes)
+
+const port = process.env.PORT || 3000
+app.listen(port, () =>
+    console.log(`La aplicación ha iniciado en el puerto: ${port}`)
+)
