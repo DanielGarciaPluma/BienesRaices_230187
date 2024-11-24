@@ -20,9 +20,24 @@ const formularioRegister = (req, res) => {
 const register = async (req, res) => { 
     await check('nombre').notEmpty().withMessage('<img src="/assets/error.png" alt="Error" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px; display: inline-block;" /> El nombre no puede ir vacío').run(req)
     await check('email').isEmail().withMessage('<img src="/assets/error.png" alt="Error" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px; display: inline-block;" /> El correo no puede ir vacío').run(req)
-    await check('birthDate').isISO8601().withMessage('<img src="/assets/error.png" alt="Error" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px; display: inline-block;" /> La fecha de nacimiento debe ser válida').run(req)
     await check('password').isLength({ min: 8 }).withMessage('<img src="/assets/error.png" alt="Error" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px; display: inline-block;" /> La contraseña debe ser de al menos 8 caracteres').run(req)
     await check('confirmPassword').custom((value, { req }) => value === req.body.password).withMessage('<img src="/assets/error.png" alt="Error" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px; display: inline-block;" /> Las contraseñas no coinciden').run(req)
+
+    await check('birthDate').isISO8601().withMessage('La fecha de nacimiento debe ser válida<img src="/assets/error.png" alt="Error" style="width: 20px; height: 20px; vertical-align: middle; margin-left: 12px; display: inline-block;"  />').bail().custom((value) => {
+        const birthDate = new Date(value);
+        const today = new Date();
+        const age = today.getFullYear() - birthDate.getFullYear();
+        const monthDiff = today.getMonth() - birthDate.getMonth();
+        const dayDiff = today.getDate() - birthDate.getDate();
+
+        // Ajustar la edad si aún no ha pasado el cumpleaños este año
+        if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+            return age - 1 >= 18;
+        }
+        return age >= 18;
+    })
+    .withMessage(' <img src="/assets/error.png" alt="Error" style="width: 20px; height: 20px; vertical-align: middle; margin-left: 10px; display: inline-block;" Debe ser mayor de edad para registrarse. />')
+    .run(req);
 
     let result = validationResult(req)
 
