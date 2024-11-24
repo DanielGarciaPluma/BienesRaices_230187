@@ -1,5 +1,4 @@
 import { check, validationResult } from "express-validator"
-
 import User from "../Models/Users.js"
 import { generateId } from "../helpers/tokens.js"
 import { registerEmail } from '../helpers/emails.js'
@@ -93,7 +92,6 @@ const register = async (req, res) => {
         mesage: 'Se ha enviado un correo de confirmación a su dirección. Por favor, revise su bandeja de entrada para completar el proceso.'
     })
 }
-
 
 // ? Funcion que comprueba una cuenta
 const confirmAccount = async (req, res) => {
