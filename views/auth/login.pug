@@ -23,7 +23,7 @@ block contenido
                         a.text-sm.text-secondaryText(href="/auth/register" class="hover:text-action hover:underline hover:underline-offset-4 transition-all duration-300 ease-in-out") ¿No tienes una cuenta? Crea una
                         a.text-sm.text-secondaryText(href="/auth/passwordRecovery" class="hover:text-action hover:underline hover:underline-offset-4 transition-all duration-300 ease-in-out") ¿Olvidaste tu contraseña? Recupérala
 
-    if errores
+    if errors
         style.
             .fade-error {
                 transition: opacity 1s ease-in-out;

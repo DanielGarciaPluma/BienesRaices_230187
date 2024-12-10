@@ -102,24 +102,24 @@ const registerEmail = async (datos) => {
     })
 }
 
-const passwordRecoveryEmail = async (data) => {
+const passwordRecoveryEmail = async (datos) => {
     const transport = nodemailer.createTransport({
         host: process.env.EMAIL_HOST,
         port: process.env.EMAIL_PORT,
         auth: {
             user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS,
-        },
+            pass: process.env.EMAIL_PASS       
+        }
     });
 
-    const { email, name, token } = data;
+    const { email, nombre, token } = datos
 
     // Enviar el email
     await transport.sendMail({
         from: 'BienesRaices.com',
         to: email,
         subject: 'Recupera tu contraseña - BienesRaices.com',
-        text: `Hola, ${name}. Hemos recibido una solicitud para restablecer tu contraseña.`,
+        text: `Recupera tu contraseña`,
         html: `
            <!DOCTYPE html>
 <html lang="es">
@@ -147,7 +147,7 @@ const passwordRecoveryEmail = async (data) => {
         </p>
 
         <div style="text-align: center; margin: 20px 0;">
-            <a href="${process.env.BACKEND_URL}:${process.env.PORT ?? 3000}/auth/passwordRecovery/${token}" asdx
+            <a href="${process.env.BACKEND_URL}:${process.env.PORT ?? 3000}/auth/passwordRecovery/${token}" 
                 style="background-color: #054A91; color: #ffffff; text-decoration: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; display: inline-block;">
                 Confirmar Cuenta
             </a>
@@ -172,7 +172,7 @@ const passwordRecoveryEmail = async (data) => {
     </div>
 </body>
 </html>
-        `,,
+        `,
         attachments: [
             {
                 filename: 'logo_BR.png', 
@@ -193,4 +193,4 @@ const passwordRecoveryEmail = async (data) => {
     });
 };
 
-export { registerEmail }
+export { registerEmail, passwordRecoveryEmail }

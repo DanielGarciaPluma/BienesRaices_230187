@@ -4,7 +4,7 @@ import { formularioLogin, formularioRegister, register, confirmAccount, formular
 const router = express.Router()
 
 // ? GET 
-// ? ":" En una ruta define de manera posicional los parametros de entrada
+// ? ":" En una ruta define de manera posicional los parametros de entradaconfirm
 router.get("/findById/:id", function(req, res){
     res.send(`Se esta solicitando buscar al usuario con ID: ${req.params.id}`)
 })
@@ -41,7 +41,7 @@ router.get("/login", formularioLogin);
 router.get("/register", formularioRegister); 
 router.post("/register", register); 
 
-router.get('/confirm_Account/:token', confirmAccount); 
+router.get('/confirmAccount/:token', confirmAccount); 
 router.get('/confirm/:token', confirm); 
 
 router.get("/passwordRecovery", formularioPasswordRecovery); 

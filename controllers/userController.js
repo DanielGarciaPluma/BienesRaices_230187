@@ -1,5 +1,5 @@
 import { check, validationResult } from "express-validator"
-import User from "../Models/Users.js"
+import User from "../Models/users.js"
 import { generateId } from "../helpers/tokens.js"
 import { registerEmail, passwordRecoveryEmail } from '../helpers/emails.js'
 
@@ -44,7 +44,7 @@ const register = async (req, res) => {
         return res.render('auth/register', {
             page: 'Crear Cuenta',
             csrfToken: req.csrfToken(),
-            errores: result.array(),
+            errors: result.array(),
             user: {
                 nombre: req.body.nombre,
                 email: req.body.email,
@@ -61,7 +61,7 @@ const register = async (req, res) => {
         return res.render('auth/register', {
             page: 'Crear Cuenta',
             csrfToken: req.csrfToken(),
-            errores: [{ msg: 'El usuario ya existe' }],
+            errors: [{ msg: 'El usuario ya existe' }],
             user: {
                 nombre,
                 email, 
@@ -87,7 +87,7 @@ const register = async (req, res) => {
     })
 
     // Mostrar mensaje de confirmación
-    res.render('templates/mesage', {
+    res.render('templates/message', {
         page: 'Cuenta Creada Correctamente', 
         mesage: 'Se ha enviado un correo de confirmación a su dirección. Por favor, revise su bandeja de entrada para completar el proceso.'
     })
@@ -135,7 +135,7 @@ const checkToken = async (req, res) => {
     const user = await User.findOne({ where: { token } });
   
     if (!user || !user.confirm) {
-      return res.render("auth/confirm_Account", {
+      return res.render("auth/confirmAccount", {
         page: "Restablece tu Contraseña...",
         msg: "Hubo un error al validar tu información. Verifica que tu cuenta esté confirmada.",
         error: true,
@@ -227,7 +227,7 @@ const resetPassword = async (req, res) => {
     user.token = null;
     await user.save();
   
-    res.render("auth/confirm_Account", {
+    res.render("auth/confirmAccount", {
       page: "Password Reestablecido",
       msg: "El password se Guardó correctamente ",
     });
@@ -239,7 +239,7 @@ const resetPassword = async (req, res) => {
     const user = await User.findOne({ where: { token } });
   
     if (!user) {
-      return res.render("auth/confirm_Account", {
+      return res.render("auth/confirmAccount", {
         page: "Error",
         msg: "Token inválido",
         error: true,
