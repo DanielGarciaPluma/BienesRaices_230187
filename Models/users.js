@@ -28,6 +28,13 @@ const User = db.define('Users', {
             const salt = await bcrypt.genSalt(10);
             user.password = await bcrypt.hash(user.password, salt);
         },
+        beforeUpdate: async function (user){
+            if(user.changed('password')){
+                const salt = await  bcrypt.genSalt(10)
+                user.password = await bcrypt.hash(user.password, salt);
+            }
+            
+        } 
     }
 });
 
