@@ -178,13 +178,14 @@ const resetPassword = async (req, res) => {
     }
   
     // Generar un token
+    user.password = '';
     user.token = generateId();
     await user.save();
   
     // Enviar un Email
     passwordRecoveryEmail({
       email: user.email,
-      name: user.name,
+      nombre: user.nombre,
       token: user.token,
     });
   
