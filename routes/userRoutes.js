@@ -1,10 +1,10 @@
 import express from 'express'
-import { formularioLogin, formularioRegister, register, confirmAccount, formularioPasswordRecovery } from '../Controllers/userController.js'
+import { formularioLogin, formularioRegister, register, confirmAccount, formularioPasswordRecovery, checkToken, newPassword, confirm, resetPassword } from '../Controllers/userController.js'
 
 const router = express.Router()
 
 // ? GET 
-// ? ":" En una ruta define de manera posicional los parametros de entrada
+// ? ":" En una ruta define de manera posicional los parametros de entradaconfirm
 router.get("/findById/:id", function(req, res){
     res.send(`Se esta solicitando buscar al usuario con ID: ${req.params.id}`)
 })
@@ -36,13 +36,18 @@ router.delete("/deleteUser/:email", function(req, res){
 })
 
 // ? Aqui se estan creando las rutas
-router.get("/login", formularioLogin) // ? middleware
-router.get("/register", formularioRegister)  
+router.get("/login", formularioLogin); 
 
-router.post("/register", register)
+router.get("/register", formularioRegister); 
+router.post("/register", register); 
 
-router.get("/confirmAccount/:token", confirmAccount)
+router.get('/confirmAccount/:token', confirmAccount); 
+router.get('/confirm/:token', confirm); 
 
-router.get("/passwordRecovery", formularioPasswordRecovery)
+router.get("/passwordRecovery", formularioPasswordRecovery); 
+router.post("/passwordRecovery",resetPassword)
+
+router.get('/passwordRecovery/:token', checkToken);
+router.post('/passwordRecovery/:token', newPassword); 
 
 export default router
