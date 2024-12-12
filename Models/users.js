@@ -37,4 +37,8 @@ const User = db.define('Users', {
     }
 });
 
+User.prototype.passwordVerify = async function(password) {
+    return await bcrypt.compare(password, this.password);
+};
+
 export default User;

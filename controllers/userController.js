@@ -1,13 +1,73 @@
 import { check, validationResult } from "express-validator"
 import User from "../Models/users.js"
-import { generateId } from "../helpers/tokens.js"
+import bcrypt from 'bcrypt';
+import { generateId, generarJWT } from "../helpers/tokens.js"
 import { registerEmail, passwordRecoveryEmail } from '../helpers/emails.js'
 
 const formularioLogin = (req, res) => {
     res.render('auth/login', {
-        page : 'Inicia Sesion'
+        page : 'Inicia Sesion',
+        csrfToken: req.csrfToken(),
     })
 }
+
+const authenticate = async (req, res) => {
+    const { email, password } = req.body;
+
+    // Validación básica
+    await check('email').isEmail().withMessage('El correo no es válido').run(req);
+    await check('password').notEmpty().withMessage('La contraseña no puede estar vacía').run(req);
+
+    const result = validationResult(req);
+    if (!result.isEmpty()) {
+        return res.render('auth/login', {
+            page: 'Iniciar Sesión',
+            csrfToken: req.csrfToken(),
+            errores: result.array(),
+            user: req.body
+        });
+    }
+
+    const user = await User.findOne({ where: { email: email } });
+
+    if (!user) {
+        return res.render('auth/login', {
+            page: 'Iniciar Sesión',
+            csrfToken: req.csrfToken(),
+            errores: [{ msg: 'Correo no registrado. Crea una cuenta para iniciar sesion' }],
+            user: req.body
+        });
+    }
+
+    if (!user.confirm) {
+        return res.render('auth/login', {
+            page: 'Iniciar Sesión',
+            csrfToken: req.csrfToken(),
+            errores: [{ msg: 'La cuenta aun no ha sido autenticada.' }],
+            user: req.body
+        });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+        return res.render('auth/login', {
+            pagina: 'Iniciar Sesión',
+            csrfToken: req.csrfToken(),
+            errores: [{ msg: 'Contraseña incorrecta.' }],
+            usuario: req.body
+        });
+    }
+
+    // Generar el JWT
+    const token = generarJWT(user.id);
+
+    // Almacenar el token en una cookie
+    res.cookie('_token', token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production', // Solo si es producción, asegurar que sea seguro
+        sameSite: 'Strict',
+    }).redirect('/myProperties');    
+};
 
 const formularioRegister = (req, res) => {
     res.render('auth/register', {
@@ -256,6 +316,7 @@ const resetPassword = async (req, res) => {
 export {
     formularioLogin,
     formularioRegister,
+    authenticate,
     formularioPasswordRecovery, 
     register, 
     confirmAccount,

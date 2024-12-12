@@ -1,5 +1,5 @@
 import express from 'express'
-import { formularioLogin, formularioRegister, register, confirmAccount, formularioPasswordRecovery, checkToken, newPassword, confirm, resetPassword } from '../Controllers/userController.js'
+import { formularioLogin, authenticate, formularioRegister, register, confirmAccount, formularioPasswordRecovery, checkToken, newPassword, confirm, resetPassword } from '../controllers/userController.js';
 
 const router = express.Router()
 
@@ -36,7 +36,8 @@ router.delete("/deleteUser/:email", function(req, res){
 })
 
 // ? Aqui se estan creando las rutas
-router.get("/login", formularioLogin); 
+router.get("/login", formularioLogin);
+router.post("/login", authenticate);
 
 router.get("/register", formularioRegister); 
 router.post("/register", register); 
